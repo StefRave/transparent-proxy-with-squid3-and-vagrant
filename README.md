@@ -44,3 +44,25 @@ vagrant@squid:~$ sudo tail -f /var/log/squid3/access.log
 ```
 
 Enjoy it!
+
+```
+
+See the certificate returned for https connections
+curl --insecure -v https://www.bing.com 2>&1 | awk 'BEGIN { cert=0 } /^\* Server certificate:/ { cert=1 } /^\*/ { if (cert) print }'
+
+Get & restort with new config
+sudo cp /vagrant/files/squid.conf /etc/squid/squid.conf
+sudo squid -k reconfigure
+
+Up & running?
+netstat -an |grep 3130
+
+sudo tail -f /var/log/squid/cache.log
+sudo tail -f /var/log/squid/access.log
+```
+
+## Usefull SSL docs
+http://wiki.squid-cache.org/Features/SslPeekAndSplice
+http://marek.helion.pl/install/squid.html (not tried yet)
+
+
